@@ -1,0 +1,3 @@
+MATCH (m1:Movie)
+RETURN m1.movieID AS ID
+ORDER BY ID ASC;
