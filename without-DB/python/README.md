@@ -1,5 +1,5 @@
 **Description**  
-Implementation of a recommender system as taught in this [course][1] using Python.  
+Implementation of a recommender system as taught in [this course][1] using Python.  
 
 **TODO**  
  - Make the code more readable.  
