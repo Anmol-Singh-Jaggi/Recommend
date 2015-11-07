@@ -1,4 +1,4 @@
-NEO4J_PATH="/media/Data/anmol/coding/github/Recommend/with-DB/graphDB/neo4j"
+source paths.sh
 
 echo
 echo "-----Generating new dataset-----"
