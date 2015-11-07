@@ -13,6 +13,7 @@ def main():
             has_rated = bool(random.getrandbits(1))
             if has_rated is True:
                 rating = random.randint(1,10)
+                assert(rating >= 1 and rating <= 10)
                 node = users.generate_user_id(i+1) + "," + str(rating) + "," + movies.generate_movie_id(j+1)
                 print node
         
