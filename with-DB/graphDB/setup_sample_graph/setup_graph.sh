@@ -1,3 +1,5 @@
+NEO4J_PATH="/media/Data/anmol/coding/github/Recommend/with-DB/graphDB/neo4j"
+
 echo
 echo "-----Generating new dataset-----"
 echo
@@ -8,19 +10,19 @@ cd ..
 echo
 echo "-----Stopping Neo4j-----"
 echo
-../neo4j/bin/neo4j stop
+"$NEO4J_PATH/bin/neo4j" stop
 
 echo
 echo "-----Deleting old graph.db-----"
 echo
-rm -r ../neo4j/data/graph.db
+rm -r "$NEO4J_PATH/data/graph.db"
 
 echo
 echo "-----Importing new dataset-----"
 echo
-../neo4j/bin/neo4j-import --into ../neo4j/data/graph.db --nodes:Movie dataset_generation/csv/movies.csv --nodes:User dataset_generation/csv/users.csv --relationships:RATED dataset_generation/csv/ratings.csv
+"$NEO4J_PATH/bin/neo4j-import" --into "$NEO4J_PATH/data/graph.db" --nodes:Movie dataset_generation/csv/movies.csv --nodes:User dataset_generation/csv/users.csv --relationships:RATED dataset_generation/csv/ratings.csv
 
 echo
 echo "-----Starting Neo4j server-----"
 echo
-../neo4j/bin/neo4j start
+"$NEO4J_PATH/bin/neo4j" start
