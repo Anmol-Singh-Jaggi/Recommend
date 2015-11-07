@@ -1,4 +1,6 @@
-from include.cypher_interface import *
+import sys
+sys.path.append('../include')
+from cypher_interface import *
 
 def main():
     menu = "\n1. Get recommendations\n2. List all the movies\n3. List the movies rated\n4. Update rating\n"

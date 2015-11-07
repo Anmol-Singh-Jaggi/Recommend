@@ -1,4 +1,1 @@
- - Create a file `paths.sh` and copy the contents of `paths.sh.sample` into it   
- - Change the variables in `paths.sh` accordingly  
- - cd to this folder  
- - Execute `./setup_graph.sh` (**Note: This will delete your current graph.db**)  
+ - Locate yourself in this directory and execute `./setup_graph.sh` (**Note: This will delete your current graph.db**)  

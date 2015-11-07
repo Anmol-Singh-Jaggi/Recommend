@@ -1,4 +1,4 @@
-source paths.sh
+source ../paths.py
 
 echo
 echo "-----Generating new dataset-----"
@@ -26,3 +26,9 @@ echo
 echo "-----Starting Neo4j server-----"
 echo
 "$NEO4J_PATH/bin/neo4j" start
+
+echo
+echo "-----Adding uniqueness constraints-----"
+echo
+"$NEO4J_PATH/bin/neo4j-shell" -file "$CYPHER_SCRIPTS_PATH/add_constraint_userID.cql"
+"$NEO4J_PATH/bin/neo4j-shell" -file "$CYPHER_SCRIPTS_PATH/add_constraint_movieID.cql"

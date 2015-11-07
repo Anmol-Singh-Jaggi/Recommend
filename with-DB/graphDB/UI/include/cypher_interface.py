@@ -57,6 +57,3 @@ def get_recommendations(*args):
     output = execute_neo4j_shell(script_name, *args)
     return output
 
-
-add_constraint_userID()
-add_constraint_movieID()
