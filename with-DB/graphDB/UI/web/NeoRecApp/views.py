@@ -13,7 +13,7 @@ def index(request):
     usage.append(["/list_movies", "List all the movies present in the database"])
     
     response_dict = {}
-    response_dict["title"] = "Welcome to the NeoRec Recommendation Engine!!"
+    response_dict["title"] = "Welcome to the NeoRec Recommendation System!!"
     response_dict["table_caption"] = "Usage"
     response_dict["table_headers"] = ["Query string", "Action"]
     response_dict["table_rows"] = usage
