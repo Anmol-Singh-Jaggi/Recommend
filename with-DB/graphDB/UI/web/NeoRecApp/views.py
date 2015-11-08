@@ -1,11 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from py2neo import *
-
-import sys
-sys.path.append('../include')
-from common import craft_cypher_command
+from cypher_interface import *
 
 def index(request):
     graph = Graph()
@@ -25,6 +21,9 @@ def index(request):
     return render(request, "render_table.html", response_dict)
 
 def get_recommendations(request, userID):
+    if not is_userID_present(userID):
+        return HttpResponse("<b>Error:</b> UserID '" + str(userID) + "' not found")
+    
     graph = Graph()
     
     script_name = "compute_similarity.cql"
@@ -51,6 +50,9 @@ def get_recommendations(request, userID):
     return render(request, "render_table.html", response_dict)
 
 def view_ratings(request, userID):
+    if not is_userID_present(userID):
+        return HttpResponse("<b>Error:</b> UserID '" + str(userID) + "' not found")
+    
     graph = Graph()
     
     script_name = "show_ratings.cql"
@@ -73,11 +75,15 @@ def view_ratings(request, userID):
     return render(request, "render_table.html", response_dict)
 
 def update_rating(request, userID, movieID, rating):
-    graph = Graph()
-    
+    if not is_userID_present(userID):
+        return HttpResponse("<b>Error:</b> UserID '" + str(userID) + "' not found")
+    if not is_movieID_present(movieID):
+        return HttpResponse("<b>Error:</b> MovieID '" + str(movieID) + "' not found")
     if not (int(rating) >=1 and int(rating) <= 10):
         return HttpResponse("<b>Error:</b> Invalid rating value '" + str(rating) + "'")
     
+    graph = Graph()
+
     script_name = "update_rating.cql"
     query = craft_cypher_command(script_name, str(userID), str(movieID), str(rating))
     query_result = graph.cypher.execute(query)
