@@ -8,16 +8,23 @@ sys.path.append('../include')
 from common import craft_cypher_command
 
 def index(request):
-    response_string = ""
-    response_string += "<b>Welcome to the NeoRec Recommendation Engine!</b><br><br>"
-    response_string += "Usage-:<br><br>"
-    response_string += "<i>/get_reco/<b>userID</b></i> : Get recommendations for the given userID<br>"
-    response_string += "<i>/view_ratings/<b>userID</b></i> : Get the list of movies rated by the given userID<br>"
-    response_string += "<i>/update_rating/<b>userID/movieID/rating</b></i> : Update rating for movieID by the given userID<br>"
-    response_string += "<i>/list_movies</i> : List all the movies present in the database<br>"
-    return HttpResponse(response_string)
+    graph = Graph()
+    
+    usage = []
+    usage.append(["/get_reco", "/userID", "Get recommendations for the given userID"])
+    usage.append(["/view_ratings", "/userID", "Get the list of movies rated by the given userID"])
+    usage.append(["/update_rating", "/userID/movieID/rating", "Update rating for movieID by the given userID"])
+    usage.append(["/list_movies", "", "List all the movies present in the database"])
+    
+    response_dict = {}
+    response_dict["title"] = "Welcome to the NeoRec Recommendation Engine!!"
+    response_dict["table_caption"] = "Usage"
+    response_dict["table_headers"] = ["Option", "Parameters", "Comments"]
+    response_dict["table_rows"] = usage
+    
+    return render(request, "render_table.html", response_dict)
 
-def get_recommendation(request, userID):
+def get_recommendations(request, userID):
     graph = Graph()
     
     script_name = "compute_similarity.cql"
@@ -28,13 +35,20 @@ def get_recommendation(request, userID):
     query = craft_cypher_command(script_name, str(userID))
     query_result = graph.cypher.execute(query)
     
-    response_string = "S.No., movieID, Predicted rating <br><br>"
+    query_result_parsed = []
     index = 1
     for record in query_result:
-        response_string += str(index) + ", " + str(record[0]) + ", " + str(record[1]) + "<br>"
+        record_parsed = [index, record[0], record[1]]
+        query_result_parsed.append(record_parsed)
         index += 1
+
+    response_dict = {}
+    response_dict["title"] = "View recommendations"
+    response_dict["table_caption"] = "Recommendations for userID '" + str(userID) + "'"
+    response_dict["table_headers"] = ["S.No", "movieID", "Predicted rating"]
+    response_dict["table_rows"] = query_result_parsed
     
-    return HttpResponse(response_string)
+    return render(request, "render_table.html", response_dict)
 
 def view_ratings(request, userID):
     graph = Graph()
@@ -43,16 +57,26 @@ def view_ratings(request, userID):
     query = craft_cypher_command(script_name, str(userID))
     query_result = graph.cypher.execute(query)
     
-    response_string = "S.No., movieID, Rating <br><br>"
+    query_result_parsed = []
     index = 1
     for record in query_result:
-        response_string += str(index) + ", " + str(record[0]) + ", " + str(record[1]) + "<br>"
+        record_parsed = [index, record[0], record[1]]
+        query_result_parsed.append(record_parsed)
         index += 1
+
+    response_dict = {}
+    response_dict["title"] = "View ratings"
+    response_dict["table_caption"] = "Ratings of userID '" + str(userID) + "'"
+    response_dict["table_headers"] = ["S.No", "movieID", "Rating"]
+    response_dict["table_rows"] = query_result_parsed
     
-    return HttpResponse(response_string)
+    return render(request, "render_table.html", response_dict)
 
 def update_rating(request, userID, movieID, rating):
     graph = Graph()
+    
+    if not (int(rating) >=1 and int(rating) <= 10):
+        return HttpResponse("<b>Error:</b> Invalid rating value '" + str(rating) + "'")
     
     script_name = "update_rating.cql"
     query = craft_cypher_command(script_name, str(userID), str(movieID), str(rating))
@@ -67,10 +91,18 @@ def list_movies(request):
     query = craft_cypher_command(script_name)
     query_result = graph.cypher.execute(query)
     
-    response_string = "S.No., movieID <br><br>"
+    query_result_parsed = []
     index = 1
     for record in query_result:
-        response_string += str(index) + ", " + str(record[0]) + "<br>"
+        record_parsed = [index, record[0]]
+        query_result_parsed.append(record_parsed)
         index += 1
+
+    response_dict = {}
+    response_dict["title"] = "List of movies"
+    response_dict["table_caption"] = "List of movies"
+    response_dict["table_headers"] = ["S.No", "movieID"]
+    response_dict["table_rows"] = query_result_parsed
     
-    return HttpResponse(response_string)
+    return render(request, "render_table.html", response_dict)
+
