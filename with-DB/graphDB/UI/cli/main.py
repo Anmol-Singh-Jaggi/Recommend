@@ -1,5 +1,3 @@
-import sys
-sys.path.append('../include')
 from cypher_interface import *
 
 def main():

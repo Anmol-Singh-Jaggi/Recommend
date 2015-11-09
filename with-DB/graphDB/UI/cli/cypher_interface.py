@@ -1,4 +1,14 @@
+import subprocess
+
+import sys
+sys.path.append('../include')
 from common import *
+NEO4J_SHELL_PATH = NEO4J_PATH + "/bin/neo4j-shell"
+
+def execute_neo4j_shell(cypher_script_name, *args):
+    cypher_command = craft_cypher_command(cypher_script_name, *args)
+    return subprocess.check_output([NEO4J_SHELL_PATH, "-c", cypher_command])
+
 
 # input -> NULL
 def add_constraint_userID(*args):
