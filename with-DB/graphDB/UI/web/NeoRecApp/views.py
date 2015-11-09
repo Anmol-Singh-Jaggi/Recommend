@@ -35,18 +35,11 @@ def get_recommendations(request):
     query = craft_cypher_command(script_name, str(userID))
     query_result = graph.cypher.execute(query)
     
-    query_result_parsed = []
-    index = 1
-    for record in query_result:
-        record_parsed = [index, record[0], record[1]]
-        query_result_parsed.append(record_parsed)
-        index += 1
-
     response_dict = {}
     response_dict["title"] = "View recommendations"
     response_dict["table_caption"] = "Recommendations for userID '" + str(userID) + "'"
-    response_dict["table_headers"] = ["S.No", "movieID", "Predicted rating"]
-    response_dict["table_rows"] = query_result_parsed
+    response_dict["table_headers"] = query_result.columns
+    response_dict["table_rows"] = query_result
     
     return render(request, "render_table.html", response_dict)
 
@@ -60,19 +53,12 @@ def view_ratings(request):
     script_name = "show_ratings.cql"
     query = craft_cypher_command(script_name, str(userID))
     query_result = graph.cypher.execute(query)
-    
-    query_result_parsed = []
-    index = 1
-    for record in query_result:
-        record_parsed = [index, record[0], record[1]]
-        query_result_parsed.append(record_parsed)
-        index += 1
 
     response_dict = {}
     response_dict["title"] = "View ratings"
     response_dict["table_caption"] = "Ratings of userID '" + str(userID) + "'"
-    response_dict["table_headers"] = ["S.No", "movieID", "Rating"]
-    response_dict["table_rows"] = query_result_parsed
+    response_dict["table_headers"] = query_result.columns
+    response_dict["table_rows"] = query_result
     
     return render(request, "render_table.html", response_dict)
 
@@ -103,19 +89,12 @@ def list_movies(request):
     script_name = "show_movies.cql"
     query = craft_cypher_command(script_name)
     query_result = graph.cypher.execute(query)
-    
-    query_result_parsed = []
-    index = 1
-    for record in query_result:
-        record_parsed = [index, record[0]]
-        query_result_parsed.append(record_parsed)
-        index += 1
 
     response_dict = {}
     response_dict["title"] = "List of movies"
     response_dict["table_caption"] = "List of movies"
-    response_dict["table_headers"] = ["S.No", "movieID"]
-    response_dict["table_rows"] = query_result_parsed
+    response_dict["table_headers"] = query_result.columns
+    response_dict["table_rows"] = query_result
     
     return render(request, "render_table.html", response_dict)
 

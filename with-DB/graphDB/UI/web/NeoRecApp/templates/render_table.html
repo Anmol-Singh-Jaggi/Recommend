@@ -16,12 +16,14 @@ table, th, td { border: 1px solid black; }
 <table style="margin: 0px auto">
 <caption><h2>{{table_caption}}</h2></caption>
 <tr>
+<th>Index</th>
 {% for header in table_headers %}
 <th>{{header}}</th>
 {% endfor %}
 </tr>
 {% for table_row in table_rows %}
 <tr>
+<td>{{forloop.counter}}</td>
 {% for cell in table_row %}
 <td>{{cell}}</td>
 {% endfor %}
