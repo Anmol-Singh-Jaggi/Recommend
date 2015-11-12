@@ -1,7 +1,7 @@
 #Implementation using Neo4j
 
 Algorithms currently in use:  
- - k-NN with cosine similarity as described [here][1]  
+ - [k-NN with cosine similarity][1]  
 
 **Setup**  
 Before doing anything else, first do these steps:  
