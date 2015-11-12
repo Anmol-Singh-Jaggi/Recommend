@@ -1,4 +1,7 @@
-#Implementation using Neo4j  
+#Implementation using Neo4j
+
+Algorithms currently in use:  
+ - k-NN with cosine similarity as described [here][1]  
 
 **Setup**  
 Before doing anything else, first do these steps:  
@@ -16,4 +19,4 @@ Before doing anything else, first do these steps:
   - Then, let the usual algorithm run on the property `trainRating` and generate the property `predictedRating` for all the relationships having the property `testRating`  
   - The error-statistics can now be generated using `testRating` and `predictedRating` properties  
 
-
+[1]:http://graphgist.neo4j.com/#!/gists/3bf3a8e77dd53fe2a87c71e000311d99
