@@ -3,7 +3,7 @@ destination_path="csv"
 
 if [ -d "$destination_path" ]; then
     echo "The destination path '$destination_path/' already exists!!"
-    echo "Delete it and run this script again to recreate it."
+    echo "In case you want to recreate the csv dataset, delete that folder and run this script again."
     exit 0
 fi
 
