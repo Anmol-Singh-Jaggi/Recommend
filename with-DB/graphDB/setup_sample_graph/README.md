@@ -1,1 +1,0 @@
- - Locate yourself in this directory and execute `./setup_graph.sh` (**Note: This will delete your current graph.db**)  

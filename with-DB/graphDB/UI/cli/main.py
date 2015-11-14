@@ -1,4 +1,6 @@
-from cypher_interface import *
+import sys
+sys.path.append('../../cypher_interface')
+from shell_cypher_interface import *
 
 def main():
     menu = "\n1. Get recommendations\n2. List all the movies\n3. List the movies rated\n4. Update rating\n"
@@ -32,8 +34,8 @@ def main():
             if not is_movieID_present(movieID):
                 print "movieID not found!!"
                 continue
-            rating = raw_input("Enter new rating [1-10]: ")
-            if not (int(rating) > 0 and int(rating) < 11):
+            rating = raw_input("Enter new rating [1-5]: ")
+            if not (int(rating) > 0 and int(rating) < 6):
                 print "Invalid rating!!"
                 continue
             print update_rating(userID, movieID, rating)

@@ -1,0 +1,5 @@
+#/usr/bin/python2
+USER_COUNT = 100
+MOVIE_COUNT = 100
+RATING_MIN = 1
+RATING_MAX = 5

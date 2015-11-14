@@ -1,0 +1,1 @@
+ - Locate yourself in this directory and execute `./generate_dataset.sh`  
