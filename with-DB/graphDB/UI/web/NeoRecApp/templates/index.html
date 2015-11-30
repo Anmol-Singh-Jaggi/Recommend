@@ -22,9 +22,13 @@ table, th, td { border: 1px solid black; }
 {% for table_row in table_rows %}
 <tr>
 <td>{{forloop.counter}}</td>
-{% for cell in table_row %}
-<td>{{cell}}</td>
-{% endfor %}
+<td>{{table_row.0}}</td>
+<td align="right">
+<form action={{table_row.1}} method="get">
+    {{table_row.2.as_p}}
+    <input type="submit" value="OK"/>
+</form> 
+</td>
 </tr>
 {% endfor %}
 </table>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from forms import *
 
 import sys
 sys.path.append('../../cypher_interface')
@@ -7,18 +8,18 @@ import py2neo_cypher_interface as pci
 
 def index(request):
     usage = []
-    usage.append(["/get_reco/?userid=<int>", "Get recommendations for the given userID"])
-    usage.append(["/view_ratings/?userid=<int>", "Get the list of movies rated by the given userID"])
-    usage.append(["/update_rating/?userid=<int>&movieid=<int>&rating=<int>", "Update rating for movieID by the given userID"])
-    usage.append(["/list_movies", "List all the movies present in the database"])
+    usage.append(["Get recommendation for user ID: ", "/neorec/get_reco/", UserIDForm])
+    usage.append(["Get the list of movies rated by user ID: ", "/neorec/view_ratings/", UserIDForm])
+    usage.append(["Update rating for movie ID by user ID: ", "/neorec/update_rating/", UpdateRatingForm])
+    usage.append(["List all the movies present in the database: ", "/neorec/list_movies", ""])
     
     response_dict = {}
     response_dict["title"] = "Welcome to the NeoRec Recommendation System!!"
-    response_dict["table_caption"] = "Usage"
-    response_dict["table_headers"] = ["Query string", "Action"]
+    response_dict["table_caption"] = "Menu"
+    response_dict["table_headers"] = ["Action", "Input"]
     response_dict["table_rows"] = usage
     
-    return render(request, "render_table.html", response_dict)
+    return render(request, "index.html", response_dict)
 
 def get_recommendations(request):
     userID = request.GET.get("userid")

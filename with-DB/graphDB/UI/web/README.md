@@ -10,4 +10,4 @@ A Django project acting as a front-end with the Neo4j server acting as the back-
  - py2neo - `pip install py2neo`  
 
 **To-Do**  
- - Add forms for taking input.
+ - ~~Add forms for taking input.~~
