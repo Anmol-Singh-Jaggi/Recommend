@@ -25,6 +25,7 @@ def get_recommendations(request):
     if not (userID and pci.is_userID_present(userID)):
         return HttpResponse("<b>Error:</b> UserID '" + str(userID) + "' not found")
     
+    pci.compute_average_rating(userID)
     pci.compute_similarity(userID)
     query_result = pci.get_recommendations(userID)
     

@@ -39,6 +39,12 @@ def update_rating(*args):
     return output
 
 # input -> (userID)
+def compute_average_rating(*args):
+    script_name = "compute_average_rating.cql"
+    output = execute_py2neo(script_name, *args)
+    return output
+
+# input -> (userID)
 def compute_similarity(*args):
     script_name = "compute_similarity.cql"
     output = execute_py2neo(script_name, *args)
