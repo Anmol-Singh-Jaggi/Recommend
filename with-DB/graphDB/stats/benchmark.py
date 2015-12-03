@@ -32,7 +32,7 @@ def benchmark_content():
 '''
 
 def main():
-    iterations = 2
+    iterations = 5
     average_time_taken = 0.0
     
     for i in xrange(iterations):
