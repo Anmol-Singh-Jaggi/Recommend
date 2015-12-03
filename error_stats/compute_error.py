@@ -34,7 +34,7 @@ def main():
             MAE += abs(difference)
             RMSE += difference * difference
             readings_compared += 1
-
+    
     MAE /= readings_compared
     RMSE = math.sqrt(RMSE/readings_compared)
     coverage = (readings_compared * 100.0)/readings_total

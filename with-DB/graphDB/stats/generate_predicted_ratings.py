@@ -8,11 +8,11 @@ def predict_collaborative():
     for row in userID_list:
         userID = row[0]
         print userID
-        predicted_ratings = get_recommendations_collaborative(userID)
+        predicted_ratings = get_recommendations_collaborative_by_movieID(userID)
         for row2 in predicted_ratings:
             movieID = row2[0]
-            rating = row2[1]
-            print >> output_file, userID + "\t" + movieID + "\t" + str(rating)
+            rating = row2[2]
+            print >> output_file, str(userID) + "\t" + str(movieID) + "\t" + str(rating)
 
 '''
 def predict_content():
