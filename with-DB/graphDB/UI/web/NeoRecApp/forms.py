@@ -1,10 +1,13 @@
 from django import forms
 
 class UserIDForm(forms.Form):
-    userid = forms.IntegerField(label='User ID')
+    userID = forms.IntegerField(label='User ID')
 
 class UpdateRatingForm(forms.Form):
-    userid = forms.IntegerField(label='User ID')
-    movieid = forms.IntegerField(label='Movie ID')
-    rating = forms.IntegerField(label="New Rating")
+    userID = forms.IntegerField(label='User ID')
+    movieID = forms.IntegerField(label='Movie ID')
+    rating = forms.IntegerField(label="Movie Rating")
 
+class RecommendForm(forms.Form):
+    userID = forms.IntegerField(label='User ID')
+    recoID = forms.IntegerField(label='Reco ID')

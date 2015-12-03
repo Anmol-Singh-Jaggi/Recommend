@@ -1,2 +1,3 @@
-MATCH (m1:Movie {movieID:'?1'})
-RETURN count(m1);
+MATCH (m1:Movie {movieID:?1})
+RETURN COUNT(m1) <> 0
+;
