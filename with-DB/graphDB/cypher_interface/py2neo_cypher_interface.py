@@ -4,6 +4,7 @@ sys.path.append(dirname(dirname(realpath(__file__))))
 from paths import CYPHER_SCRIPTS_PATH
 
 from py2neo import Graph
+graph = Graph()
 
 
 def craft_cypher_command(cypher_script_name, *args):
@@ -14,9 +15,6 @@ def craft_cypher_command(cypher_script_name, *args):
         cypher_script = cypher_script.replace("?" + str(arg_index), str(arg))
         arg_index += 1
     return cypher_script
-
-
-graph = Graph()
 
 
 def execute_py2neo(cypher_script_name, *args):
