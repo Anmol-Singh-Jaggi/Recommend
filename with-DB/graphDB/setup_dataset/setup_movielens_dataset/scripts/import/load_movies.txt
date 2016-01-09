@@ -1,0 +1,9 @@
+using periodic commit 10000
+load csv from "file:///movies.csv" as row fieldterminator ';'
+MERGE (m:Movie {movieID:toInt(row[0]) } )
+set m.name = row[1]
+with m,SPLIT(row[2],'|') as genres
+unwind genres as genre
+MERGE (g:Genre {name:genre} )
+CREATE (m)-[:GENRE]->(g)
+return m,g

@@ -1,0 +1,5 @@
+load csv from "file:///users.csv" as row fieldterminator ';'
+MERGE (u:User {userID:toInt(row[0]) } )
+set u.gender=row[1],u.age=toInt(row[2])	,u.occupation = row[3]
+return u
+

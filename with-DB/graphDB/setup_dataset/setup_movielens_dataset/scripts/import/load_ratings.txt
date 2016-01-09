@@ -1,0 +1,6 @@
+using periodic commit 10000
+load csv from "file:///ratings.csv" as row fieldterminator ';' 
+MERGE (u:User {userID:toInt(row[0])} )
+MERGE (m:Movie {movieID:toInt(row[1])} )
+CREATE (u)-[r:RATED {rating:toInt(row[2])} ]->(m)
+return count(r)
