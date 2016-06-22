@@ -1,3 +1,2 @@
-CYPHER_SCRIPTS_PATH="/media/Data/anmol/coding/github/Recommend/with-DB/graphDB/cypher/"
-NEO4J_PATH="/media/Data/anmol/coding/github/Recommend/with-DB/graphDB/neo4j"
-
+CYPHER_SCRIPTS_PATH="/home/anmol/Data/anmol/coding/Recommend/with-DB/graphDB/cypher/"
+NEO4J_PATH="/home/anmol/Data/anmol/coding/Recommend/with-DB/graphDB/neo4j"
